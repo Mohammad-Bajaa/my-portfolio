@@ -1,0 +1,41 @@
+/* Entrances are progressive enhancements; content is visible without JavaScript. */
+.reveal { animation: none; }
+.motion-ready .reveal, .motion-ready .impact > div {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s var(--reveal-delay, 0ms), transform .7s cubic-bezier(.2,.7,.3,1) var(--reveal-delay, 0ms), border-color .3s, box-shadow .3s, translate .3s, background-color .45s;
+}
+.motion-ready .is-visible { opacity: 1; transform: translateY(0); }
+.hero-shell::after { animation: ambient-drift 16s ease-in-out infinite alternate; }
+.hero-grid h1 > span { position: relative; display: inline-block; padding-bottom: 8px; }
+.hero-grid h1 > span::after { content: ''; position: absolute; height: 2px; background: linear-gradient(90deg, #78ddca99, transparent); left: 0; right: 0; bottom: 0; transform-origin: left; animation: underline-in 1.1s .65s both; }
+.button { position: relative; isolation: isolate; overflow: hidden; }
+.button::after { content: ''; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 20%, #ffffff38 50%, transparent 80%); transform: translateX(-120%); pointer-events: none; }
+.button:hover::after, .button:focus-visible::after { animation: button-sheen .75s ease; }
+.button-mark { transition: transform .35s; }
+.button:hover .button-mark { transform: rotate(90deg); }
+.navigation.open a { animation: menu-item-in .4s both; }
+.navigation.open a:nth-child(2) { animation-delay: .05s; }
+.navigation.open a:nth-child(3) { animation-delay: .1s; }
+.navigation.open a:nth-child(4) { animation-delay: .15s; }
+.skill-group span { transition: transform .25s, border-color .25s, background .25s; }
+.skill-group span:hover { transform: translateY(-4px); border-color: #7fbcaf; background: #eaf6f2; }
+.experience-marker { transition: transform .35s, background .35s; }
+.experience-item:hover .experience-marker { transform: rotate(135deg); background: #318574; }
+.visual-ripple { stroke: #84e4cd; stroke-width: 1.2; transform-box: fill-box; transform-origin: center; animation: ripple-out 3.6s ease-out infinite; }
+.visual-scan { stroke: #a1ebd8; stroke-width: 14; opacity: 0; animation: visual-scan 8s ease-in-out infinite; }
+.visual-risk .visual-scan { animation-delay: -2s; }
+.visual-incident .visual-scan { animation-delay: -4s; }
+.visual-frontend .visual-scan { animation-delay: -6s; }
+@keyframes ambient-drift { to { transform: translate(-35px, 30px) scale(1.08); } }
+@keyframes underline-in { from { transform: scaleX(0); opacity: 0; } to { transform: scaleX(1); opacity: 1; } }
+@keyframes button-sheen { to { transform: translateX(120%); } }
+@keyframes menu-item-in { from { opacity: 0; transform: translateY(-7px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes ripple-out { 0% { opacity: .7; transform: scale(.5); } 70%, 100% { opacity: 0; transform: scale(1.6); } }
+@keyframes visual-scan { 0%, 60% { opacity: 0; transform: translateX(0); } 65% { opacity: .08; } 95%, 100% { opacity: 0; transform: translateX(520px); } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .motion-ready .reveal, .motion-ready .impact > div { opacity: 1; transform: none; }
+  .skill-group span:hover, .button:hover .button-mark { transform: none; }
+  .visual-ripple, .visual-scan { opacity: 0; }
+}

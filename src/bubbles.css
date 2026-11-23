@@ -1,0 +1,37 @@
+.skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.skill-ocean { display: flex; flex-direction: column; min-width: 0; border: 1px solid #2b4855; border-radius: 16px; padding: 25px 22px 12px; background: #0e202d; overflow: hidden; }
+.skill-ocean > h3 { font-family: 'DM Sans', sans-serif; font-size: .875rem; font-weight: 550; color: #a5ccc8; text-transform: uppercase; letter-spacing: .1em; margin: 0 0 15px; }
+.bubble-field { position: relative; isolation: isolate; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-content: center; list-style: none; padding: 12px 0; margin: 0; min-width: 0; overflow: hidden; border-radius: 12px; background: radial-gradient(ellipse at 50% 100%, #35847912, transparent 75%); }
+.bubble-slot { display: grid; place-items: center; padding: 13px; min-width: 0; min-height: 158px; }
+.skill-bubble { position: relative; display: grid; place-items: center; text-align: center; width: min(var(--bubble-size), 100%); aspect-ratio: 1; padding: 12px; border-radius: 50%; border: 1px solid #6fbda87a; background: radial-gradient(circle at 30% 24%, #87e3ce29, #24534f32 45%, #0d1e2e80 75%); box-shadow: inset 0 0 20px #88e7d10a, inset -5px -7px 14px #0003, 0 6px 16px #0002; font-size: .9rem; line-height: 1.5; font-weight: 500; color: #d2eee7; overflow-wrap: anywhere; animation: bubble-drift var(--float-duration) ease-in-out var(--float-delay) infinite; transition: border-color .3s, background-color .3s, box-shadow .3s; }
+.skill-bubble::before { content: ''; position: absolute; top: 11%; left: 22%; width: 23%; height: 9%; border-radius: 50%; background: #ddfff31f; transform: rotate(-32deg); pointer-events: none; }
+.skill-bubble { display: flex; flex-direction: column; justify-content: center; gap: 7px; min-height: 0; line-height: 1.3; animation: none; }
+.skill-ocean > .bubble-field { flex: 1; }
+.skill-logo { display: block; width: 28px; height: 28px; flex-shrink: 0; color: inherit; opacity: .95; }
+.bubble-label { position: relative; z-index: 1; }
+.bubble-field[data-physics='active'] { display: block; flex: 0 0 auto; }
+.bubble-field[data-physics='active'] .bubble-slot { position: absolute; top: 0; left: 0; display: block; padding: 0; min-height: 0; will-change: transform; }
+.bubble-field[data-physics='active'] .skill-bubble { width: 100%; height: 100%; transform: scale(calc(1 + var(--squash, 0)), calc(1 - var(--squash, 0))); }
+.bubble-slot:nth-child(even) .skill-bubble { animation-direction: reverse; }
+.skill-bubble:hover { background-color: #2b6d5c4d; border-color: #a2edda; box-shadow: inset 0 0 22px #8ee8ce15, 0 0 22px #78ddca15; }
+.bubble-field[data-floating='false'] .skill-bubble, .bubble-field:hover .skill-bubble { animation-play-state: paused; }
+.familiar-section { overflow: hidden; }
+.bubble-field--familiar { grid-template-columns: repeat(6, minmax(0, 1fr)); margin-top: 24px; background: radial-gradient(ellipse at 50% 100%, #7e85c618, transparent 75%); }
+.bubble-field--familiar .skill-bubble { color: #dee1f6; border-color: #9aa9df70; background: radial-gradient(circle at 30% 24%, #b3c0ff26, #464d7c30 45%, #101b2e80 75%); }
+.bubble-field--familiar .skill-bubble:hover { background-color: #5b63984d; border-color: #bbc9ff; }
+@keyframes bubble-drift { 0%, 100% { transform: translate(-5px, 6px); } 25% { transform: translate(6px, -5px); } 50% { transform: translate(3px, 7px); } 75% { transform: translate(-7px, -4px); } }
+@media (max-width: 1050px) {
+  .bubble-field { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bubble-field--familiar { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .skills-grid { grid-template-columns: minmax(0, 1fr); }
+  .skill-ocean { padding: 22px 15px 8px; }
+  .bubble-field--familiar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bubble-field[data-long='true'] { grid-template-columns: minmax(0, 1fr); }
+  .bubble-slot { padding: 10px; min-height: 150px; }
+  .skill-bubble { padding: 10px; font-size: .875rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skill-bubble { animation: none; transform: none; transition: none; }
+}
