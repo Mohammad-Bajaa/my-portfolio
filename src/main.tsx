@@ -17,14 +17,14 @@ function Link({ link, className = '', iconOnly = false }: { link: PortfolioLink;
   const external = /^https?:\/\//.test(link.href);
   const href = link.kind === 'cv' && !external && !link.href.startsWith('/')
     ? `${import.meta.env.BASE_URL}${link.href}` : link.href;
-  return <a className={`${className} contact-${link.kind}`} href={href} aria-label={iconOnly ? link.label : undefined} download={link.kind === 'cv' || undefined}
+  return <a className={`${className} contact-${link.kind}`} href={href} aria-label={link.label} download={link.kind === 'cv' || undefined}
     target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
     {link.kind === 'email' && <svg className="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="3" /><path d="m4 7 8 6 8-6" /></svg>}
     {link.kind === 'linkedin' && <svg className="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="3" /><path d="M7.5 10v7M11.5 17v-7M11.5 13a3 3 0 0 1 6 0v4" /><circle cx="7.5" cy="7" r=".9" fill="currentColor" stroke="none" /></svg>}
     {link.kind === 'cv' && <svg className="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M12 3v12m-4-4 4 4 4-4M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4" /></svg>}
     {link.kind === 'whatsapp' && <svg className="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true" focusable="false"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.5L3 20.5l1.3-4.8a8.5 8.5 0 1 1 16.2-4Z" /><path d="m8.4 7.5 1.7 2.7-1.1 1.2a8.9 8.9 0 0 0 3.6 3.4l1.1-1.2 2.9 1.5c-.2 2.8-3.1 2.6-6.4.2-3.2-2.4-4.2-5.7-1.8-7.8Z" /></svg>}
     {link.kind === 'telegram' && <svg className="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="m3 10 18-7-4 18-6-7-8-4Z" /><path d="m11 14 6-7M11 14v5l3-2" /></svg>}
-    {!iconOnly && link.label}</a>;
+    {!iconOnly && <><span className="contact-label">{link.label}</span>{link.mobileLabel && <span className="contact-mobile-label">{link.mobileLabel}</span>}</>}</a>;
 }
 
 function App() {
@@ -35,6 +35,8 @@ function App() {
   usePageMotion(page);
   const links = data.links.filter(link => link.visible && link.href.trim());
   const contactLinks = links.filter(link => link.kind !== 'cv');
+  const primaryLinks = links.filter(link => link.kind === 'cv' || link.kind === 'email');
+  const socialLinks = links.filter(link => ['linkedin', 'whatsapp', 'telegram'].includes(link.kind));
   const whatsapp = links.find(link => link.kind === 'whatsapp');
   useEffect(() => {
     const close = (event: KeyboardEvent) => {
@@ -105,7 +107,10 @@ function App() {
     </section>
     <Learning />
     <Education />
-    {links.length > 0 && <section className="contact-section" id="contact" aria-labelledby="contact-title"><div className="wrap section reveal"><p className="eyebrow">{data.contact.eyebrow}</p><h2 id="contact-title">{data.contact.title}</h2><p>{data.contact.description}</p><div className="contact-links">{links.map(link => <Link link={link} key={link.kind} className={`button ${link.kind === 'cv' ? 'secondary' : 'primary'}`} />)}</div></div></section>}
+    {links.length > 0 && <section className="contact-section" id="contact" aria-labelledby="contact-title"><div className="wrap section reveal"><p className="eyebrow">{data.contact.eyebrow}</p><h2 id="contact-title">{data.contact.title}</h2><p>{data.contact.description}</p><div className="contact-links">
+      {primaryLinks.length > 0 && <div className="contact-primary-actions" role="group" aria-label={data.contact.primaryLabel}>{primaryLinks.map(link => <Link link={link} key={link.kind} className={`button ${link.kind === 'cv' ? 'secondary' : 'primary'}`} />)}</div>}
+      {socialLinks.length > 0 && <div className="contact-social-actions" role="group" aria-label={data.contact.socialLabel}>{socialLinks.map(link => <Link link={link} key={link.kind} className="button primary" />)}</div>}
+    </div></div></section>}
     </main>
     <footer className="wrap footer"><a href="#top" className="footer-name">{data.name}<span>.</span></a><p>{data.footer}</p><a href="#top">{data.ui.back}</a></footer>
   </div>;

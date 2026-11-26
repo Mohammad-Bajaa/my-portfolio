@@ -1,5 +1,6 @@
 export type PortfolioLink = {
   label: string;
+  mobileLabel?: string;
   href: string;
   kind: 'email' | 'linkedin' | 'cv' | 'whatsapp' | 'telegram';
   visible: boolean;
@@ -41,7 +42,7 @@ export const portfolio = {
   links: [
     { label: 'Download CV', href: 'cv.pdf', kind: 'cv', visible: true },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/mohammad-bajaa-6b5a89223/', kind: 'linkedin', visible: true },
-    { label: 'mohbaj2016@gmail.com', href: 'mailto:mohbaj2016@gmail.com', kind: 'email', visible: true },
+    { label: 'mohbaj2016@gmail.com', mobileLabel: 'Email me', href: 'mailto:mohbaj2016@gmail.com', kind: 'email', visible: true },
     { label: 'WhatsApp', href: 'https://wa.me/963996454519', kind: 'whatsapp', visible: true },
     { label: 'Telegram', href: 'https://t.me/MohammadBj997', kind: 'telegram', visible: true },
   ] satisfies PortfolioLink[],
@@ -185,6 +186,8 @@ export const portfolio = {
   contact: {
     eyebrow: 'Next chapter', title: 'Let’s build something useful.',
     description: 'Interested in my work? Let’s talk about Full-Stack and Laravel Backend opportunities.',
+    primaryLabel: 'Email and CV',
+    socialLabel: 'Social profiles',
   },
   footer: 'Built with care. Designed for clarity.',
 };

@@ -1,4 +1,6 @@
 .site-header { position: relative; z-index: 30; background: var(--navy); }
+.contact-primary-actions, .contact-social-actions { display: flex; flex-wrap: wrap; gap: 16px; }
+.contact-mobile-label { display: none; }
 .navigation, .navigation.open { max-height: calc(100svh - 100px); overflow-y: auto; overscroll-behavior: contain; }
 .navigation.open a:nth-child(6) { animation-delay: .25s; }
 .skip-link { opacity: 0; pointer-events: none; }
@@ -57,6 +59,17 @@
   .education-layout { grid-template-columns: minmax(0, 1fr); gap: 30px; }
 }
 @media (max-width: 700px) {
+  .hero-shell > .impact { display: none; }
+  .contact-links { flex-direction: column; align-items: stretch; gap: 16px; }
+  .contact-primary-actions { width: 100%; flex-wrap: nowrap; gap: 10px; }
+  .contact-primary-actions .button { flex: 1 1 0; min-width: 0; min-height: 48px; padding: 12px 8px; font-size: .875rem; gap: 6px; white-space: nowrap; }
+  .contact-primary-actions .contact-icon { width: 18px; height: 18px; }
+  .contact-email .contact-label { display: none; }
+  .contact-email .contact-mobile-label { display: inline; }
+  .contact-social-actions { flex-direction: row; gap: 12px; }
+  .contact-social-actions .button { display: inline-grid; place-items: center; flex: 0 0 46px; width: 46px; height: 46px; min-height: 46px; padding: 0; border-radius: 50%; gap: 0; }
+  .contact-social-actions .contact-label { display: none; }
+  .contact-social-actions .contact-icon { width: 21px; height: 21px; }
   .certificate-grid { margin-top: 30px; }
   .education-entry { gap: 16px; }
   .languages-card { padding: 23px; }
