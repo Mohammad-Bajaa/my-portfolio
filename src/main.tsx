@@ -5,11 +5,13 @@ import { ProjectVisual } from './components/ProjectVisual';
 import { usePageMotion } from './components/usePageMotion';
 import { WorkplaceProjects } from './components/WorkplaceProjects';
 import { BubbleField } from './components/BubbleField';
+import { Learning, Education } from './components/Learning';
 import './styles.css';
 import './enhancements.css';
 import './motion.css';
 import './dark-theme.css';
 import './bubbles.css';
+import './learning.css';
 
 function Link({ link, className = '', iconOnly = false }: { link: PortfolioLink; className?: string; iconOnly?: boolean }) {
   const external = /^https?:\/\//.test(link.href);
@@ -47,8 +49,9 @@ function App() {
   }, [menuOpen]);
 
   return <div ref={page}>
+    <div className="reading-progress" aria-hidden="true" />
     <a className="skip-link" href="#main">{data.ui.skip}</a>
-    <div className="hero-shell" id="top">
+    <div className="site-header" id="top">
       <header className="header wrap" ref={header} onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setMenuOpen(false); }}>
         <div className="header-person"><a href="#top" className="header-identity" onClick={() => setMenuOpen(false)}><span>{data.name}</span><small>{data.location}</small></a>{whatsapp && <Link link={whatsapp} className="header-whatsapp" iconOnly />}</div>
         <button ref={menuButton} className={`menu-toggle ${menuOpen ? 'is-open' : ''}`} aria-label={menuOpen ? data.ui.close : data.ui.menu} aria-expanded={menuOpen} aria-controls="navigation" onClick={() => setMenuOpen(!menuOpen)}><span>{menuOpen ? data.ui.close : data.ui.menu}</span><span className="burger-icon" aria-hidden="true"><span /><span /></span></button>
@@ -57,7 +60,9 @@ function App() {
           {contactLinks.length > 0 && <a className="nav-contact" href="#contact" onClick={() => setMenuOpen(false)}>{data.ui.talk}</a>}
         </nav>
       </header>
-      <main id="main">
+    </div>
+      <main id="main" tabIndex={-1}>
+      <div className="hero-shell">
         <section className="hero wrap hero-grid" aria-labelledby="hero-title">
           <div className="hero-content">
           <div className="eyebrow hero-eyebrow"><span className="hero-loader" aria-hidden="true" />{data.hero.eyebrow}</div>
@@ -73,7 +78,6 @@ function App() {
           </figure>
         </section>
         <div className="impact wrap">{data.impact.map(item => <div key={item.value}><strong>{item.value}</strong><span>{item.label}</span></div>)}</div>
-      </main>
     </div>
     <section className="work-section section wrap" id="work" aria-labelledby="work-title">
       <div className="section-heading reveal"><p className="eyebrow">{data.work.eyebrow}</p><div className="heading-row"><h2 id="work-title">{data.work.title}</h2><p className="work-description">{data.work.description}</p></div></div>
@@ -99,7 +103,10 @@ function App() {
         <BubbleField items={data.skills.familiar.items} label={data.skills.familiar.title} familiar />
       </section>
     </section>
+    <Learning />
+    <Education />
     {links.length > 0 && <section className="contact-section" id="contact" aria-labelledby="contact-title"><div className="wrap section reveal"><p className="eyebrow">{data.contact.eyebrow}</p><h2 id="contact-title">{data.contact.title}</h2><p>{data.contact.description}</p><div className="contact-links">{links.map(link => <Link link={link} key={link.kind} className={`button ${link.kind === 'cv' ? 'secondary' : 'primary'}`} />)}</div></div></section>}
+    </main>
     <footer className="wrap footer"><a href="#top" className="footer-name">{data.name}<span>.</span></a><p>{data.footer}</p><a href="#top">{data.ui.back}</a></footer>
   </div>;
 }

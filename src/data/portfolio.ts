@@ -34,6 +34,7 @@ export const portfolio = {
     { label: 'Projects', href: '#workplaces' },
     { label: 'Experience', href: '#experience' },
     { label: 'Skills', href: '#skills' },
+    { label: 'Learning', href: '#learning' },
   ],
   // Work history is from the CV; contact links include the owner's updates.
   // Empty URLs are hidden automatically, even when visible is true.
@@ -137,6 +138,49 @@ export const portfolio = {
       title: 'Familiar with',
       items: ['C#', 'Java', 'Elasticsearch', 'Kibana', 'Ollama', 'Qwen'],
     },
+  },
+  learning: {
+    eyebrow: 'Courses & certificates',
+    title: 'Always building. Always learning.',
+    description: 'Completed courses in frontend engineering and software delivery, with certificates you can verify.',
+    completedLabel: 'Completed',
+    platformLabel: 'Coursera',
+    viewLabel: 'View certificate',
+    courses: [
+      {
+        id: 'AY7ICS8S5488', order: 1, visible: true,
+        title: 'Continuous Integration and Continuous Delivery (CI/CD)',
+        issuer: 'IBM', visual: 'pipeline',
+        description: 'Continuous integration, delivery, and deployment workflows.',
+        completedOn: '2024-08-04', completedLabel: 'Aug 4, 2024',
+        href: 'https://www.coursera.org/account/accomplishments/certificate/AY7ICS8S5488',
+      },
+      {
+        id: '3ST47KCFU978', order: 2, visible: true,
+        title: 'Advanced React', issuer: 'Meta', visual: 'react',
+        description: 'Reusable components, API integration, and testing.',
+        completedOn: '2024-07-08', completedLabel: 'Jul 8, 2024',
+        href: 'https://www.coursera.org/account/accomplishments/verify/3ST47KCFU978',
+      },
+      {
+        id: 'PWFNUSK9HM9L', order: 3, visible: true,
+        title: 'React Basics', issuer: 'Meta', visual: 'react',
+        description: 'Components, props, forms, and interactive interfaces.',
+        completedOn: '2024-06-01', completedLabel: 'Jun 1, 2024',
+        href: 'https://www.coursera.org/account/accomplishments/verify/PWFNUSK9HM9L',
+      },
+    ],
+  },
+  education: {
+    eyebrow: 'Education & languages',
+    title: 'A foundation to build on.',
+    languageLabel: 'Languages',
+    // Academic status and language levels are from the current public/cv.pdf.
+    entries: [
+      { degree: 'M.Sc. in Web Science', institution: 'Syrian Virtual University', detail: 'In progress - coursework completed', visible: true },
+      { degree: 'Bachelor’s in Software Engineering', institution: 'Higher Institute for Applied Sciences and Technology (HIAST)', detail: '2022', visible: true },
+    ],
+    languages: [{ name: 'Arabic', level: 'Native' }, { name: 'English', level: 'B2' }],
   },
   contact: {
     eyebrow: 'Next chapter', title: 'Let’s build something useful.',

@@ -18,7 +18,7 @@ npm run build
 npm run preview
 ```
 
-The static output is in `dist/`. Relative asset paths support both GitHub Pages project sites and root domains. Fonts use Google Fonts, with local sans-serif fallbacks if unavailable.
+The static output is in `dist/`. Relative asset paths support both GitHub Pages project sites and root domains. DM Sans and Manrope are served locally from `public/fonts/`, with their SIL Open Font License files included. There are no runtime requests to Google Fonts; system sans-serif remains the fallback.
 
 ## Edit content
 
@@ -37,6 +37,8 @@ All page copy, navigation, projects, employers, skills and contact links are in 
 - Dark colors, the slow decorative loader, the description's orbiting border light, and project hover backgrounds are in `src/dark-theme.css`. The loader rotates every 9 seconds and the border light every 12 seconds. Both stop with reduced motion.
 - Only supplied technologies and metrics are included. Blue Store has no invented performance percentage.
 - RTGS Message Sender and CBS & CMLC Letters appear only in Projects by workplace. Mar Assia's report automation is part of its single HR project. Workplace groups start expanded. The header has an icon-only WhatsApp link; all contact and CV buttons are at the bottom of the page, with SVG icons and dark tinted backgrounds.
+- Edit `learning.courses` to update the certificate cards. Each course has its verified title, issuer, completion date and certificate URL. Change `order` to reorder cards or `visible` to hide one. The three initial entries were checked against the public Coursera certificate pages.
+- Edit `education.entries` and `education.languages` for academic background and language levels. These reflect the current CV, including the M.Sc. being in progress with coursework completed. Certificate and education styling is in `src/learning.css`.
 
 ## Deploy to GitHub Pages
 
